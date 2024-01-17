@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sm-backend
+  namespace: sm-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sm-backend
+  template:
+    metadata:
+      labels:
+        app: sm-backend
+    spec:
+      containers:
+        - name: sm-backend
+          image: kpawar89/sm-backend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sm-backend
+  namespace: sm-app
+spec:
+  type: ClusterIP
+  selector:
+    app: sm-backend
+  ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 5000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sm-frontend
+  namespace: sm-app
+  labels:
+    app: sm-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sm-frontend
+  template:
+    metadata:
+      labels:
+        app: sm-frontend
+    spec:
+      containers:
+        - name: sm-frontend
+          image: kpawar89/sm-frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sm-frontend-lb
+  namespace: sm-app
+  labels:
+    app: sm-frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: sm-frontend
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+
+---
+# FOR TESTING
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: sm-frontend
+#  namespace: sm-app
+#  labels:
+#    app: sm-frontend
+#spec:
+#  type: NodePort
+#  selector:
+#    app: sm-frontend
+#  ports:
+#    - port: 80
+#      protocol: TCP
+#      targetPort: 80
+
+---
+# FOR TESTING
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: sm-backend-np
+#  namespace: sm-app
+#spec:
+#  type: NodePort 
+#  selector:
+#    app: sm-backend
+#  ports:
+#    - port: 5000
+#      protocol: TCP
+#      targetPort: 5000
