@@ -1,0 +1,15 @@
+# build the React front end
+FROM node:21-alpine
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+COPY sys-stats/package.json  ./
+COPY sys-stats/src ./src
+COPY sys-stats/public ./public
+
+RUN yarn install
+RUN yarn build
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]

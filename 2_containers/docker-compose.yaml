@@ -1,0 +1,17 @@
+services:
+  sm-backend:
+    build:
+      context: ./..
+      dockerfile: ./2_containers/Dockerfile.backend
+    image: sm-backend
+    ports:
+     - "5000:5000"
+  sm-frontend:
+    build:
+      context: ./..
+      dockerfile: ./2_containers/Dockerfile.frontend
+    image: sm-frontend
+    links:
+     - "sm-backend"
+    ports:
+     - "80:80"

@@ -1,0 +1,25 @@
+services:
+  sm-backend:
+    build:
+      context: ./..
+      dockerfile: ./3_containers/Dockerfile.backend
+    image: sm-backend
+    ports:
+      - "5000:5000"
+  sm-react:
+    build:
+      context: ./..
+      dockerfile: ./3_containers/Dockerfile.react
+    image: sm-react
+    ports:
+      - "3000:3000"
+  sm-proxy:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.nginx
+    image: sm-proxy
+    links:
+      - "sm-backend"
+      - "sm-react"
+    ports:
+      - "80:80"
