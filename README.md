@@ -22,7 +22,8 @@ In the sys-stats directory, do the following.
 
 ## Task 1 - Dockerize the Application
 
-The first task is to dockerise this application - as part of this task you will have to get the application to work with Docker and Docker Compose. You are expected to get this app to work with UWSGI or Gunicorn and serve the react frontend through Nginx. 
+The first task is to dockerise this application - as part of this task you will have to get the application to work with Docker and Docker Compose. 
+You are expected to get this app to work with UWSGI or Gunicorn and serve the react frontend through Nginx. 
 
 The React container should also perform `npm build` every time it is built.
 
@@ -39,11 +40,11 @@ You will be evaluated based on the
 
 ## Task 2 - Deploy on Cloud
 
-Next step is to deploy this application to absolutely any cloud of your choice. 
+Next step is to deploy this application to absolutely any cloud of your choice. Use IaC (Infrastructure as code) where applicable.
 
-> It's important to remember here that the application is already containerize, maybe you could deploy it to services which take an advantage of that fact. (example, AWS EBS?)
+> It's important to remember here that the application is already containerize, maybe you could deploy it to services which take an advantage of that fact. (example, AWS EKS?)
 
-You could use any other cloud service provider of your choice too. Use the smallest instance size available to save up on the cloud costs. 
+You could use any other cloud service provider of your choice too (but AWS recommended). Use the smallest instance size available to save up on the cloud costs. 
 
 The React App should be accessible on a public URL, that's the only hard requirement. 
 

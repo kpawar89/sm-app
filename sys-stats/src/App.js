@@ -24,7 +24,6 @@ class App extends Component {
       const blocks = await res.json();
       const ram = blocks.ram;
       const cpu = blocks.cpu;
-      console.log(ram);
       this.setState({
         cpu, ram
       })
